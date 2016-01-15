@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns="http://java.sun.com/xml/ns/javaee" 
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>common</display-name>
+  
+  <!-- 初始化的时候加载spring配置文件 -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath*:conf/ApplicationContext*.xml</param-value>
+  </context-param>
+  
+  <!-- Spting ApplicationContext 加载缓存 -->
+ <listener>
+ 	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+ </listener>
+ 
+ <!-- 管理session的开启与关闭 -->
+ <filter>
+ 	<filter-name>openEntityManagerInViewFilter</filter-name>
+ 	<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+ </filter>
+ <filter-mapping>
+ 	<filter-name>openEntityManagerInViewFilter</filter-name>
+ 	<url-pattern>/*</url-pattern>
+ </filter-mapping>
+ 
+ <!-- 配置struts2过滤器 -->
+ <filter>
+ 	<filter-name>struts2</filter-name>
+ 	<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+ </filter>
+ 
+ <filter-mapping>
+ 	<filter-name>struts2</filter-name>
+ 	<url-pattern>/*</url-pattern>
+ </filter-mapping>
+ 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
