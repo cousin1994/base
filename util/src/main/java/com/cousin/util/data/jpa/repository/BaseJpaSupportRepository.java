@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 public class BaseJpaSupportRepository<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseJpaRepository<T, ID> {
@@ -28,6 +29,20 @@ public class BaseJpaSupportRepository<T, ID extends Serializable> extends Simple
 		super(domainClass, em);
 		this.em=em;
 	}
+
+	
+	/**
+	 * 构造函数，注入不能改变的实体管理跟JPA的管理还有要查询的实体
+	 * @param entityInformation
+	 * @param em
+	 * @param repositoryInterface
+	 */
+	public BaseJpaSupportRepository(final JpaEntityInformation<T, ?> entityInformation,final EntityManager em,final Class<?> repositoryInterface) {
+		super(entityInformation, em);
+		this.em = em;
+		this.repositoryInterface = repositoryInterface;
+	}
+
 
 	/**
 	 * 动态封装条件并且分页，排序
@@ -47,6 +62,11 @@ public class BaseJpaSupportRepository<T, ID extends Serializable> extends Simple
 	private Specification<T> bulidSpecification(Map<String,Object> searchParams, Class<T> clz){
 		Specification<T> spec = new Specification<T>() {
 
+			/**
+			 * Root代表的是要查询的根对象
+			 * CriteriaQuery:相当于查询语句拼装器，用来组合查询的内容和查询的条件
+			 * CriteriaBuilder:用于CriteriaQuery的工厂，用于创建CriteriaQuery对象
+			 */
 			@Override
 			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				if(searchParams!=null&& searchParams.size()>1){
@@ -59,7 +79,7 @@ public class BaseJpaSupportRepository<T, ID extends Serializable> extends Simple
 			
 		};
 		
-		return null;
+		return spec;
 	}
 	
 	/**
