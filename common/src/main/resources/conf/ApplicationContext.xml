@@ -62,9 +62,10 @@
 	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
 	
 	<!-- 配置Spring Data Jpa扫描目录 -->
-	<jpa:repositories base-package="com.cousin" 
+	<jpa:repositories base-package="com.cousin.**.jpa" 
 		entity-manager-factory-ref="entityManagerFactory" 
-		transaction-manager-ref="transactionManager"/>
+		transaction-manager-ref="transactionManager"
+		factory-class="com.cousin.util.data.jpa.factory.BaseRepositoryFactoryBean"/>
 	
 	<!-- JPa事务配置 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
