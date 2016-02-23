@@ -15,6 +15,7 @@
 			<groupId>com.cousin</groupId>
 			<artifactId>util</artifactId>
 		</dependency>
+		
 	</dependencies>
   
   <build>

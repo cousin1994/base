@@ -74,7 +74,7 @@ public class BaseJpaSupportRepository<T, ID extends Serializable> extends Simple
 	 * @param clz
 	 * @return
 	 */
-	private Specification<T> bulidSpecification(Map<String,Object> searchParams, Class<T> clz){
+	private Specification<T> bulidSpecification(final Map<String,Object> searchParams, final Class<T> clz){
 		return new Specification<T>() {
 
 			/**

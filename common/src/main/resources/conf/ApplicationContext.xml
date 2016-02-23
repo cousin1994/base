@@ -21,6 +21,7 @@
 	
 	<!-- 异步调用需要用到 -->
 	<task:annotation-driven />
+
 	
 	 <!-- 定义实体管理器工厂
          Jpa配置   LocalContainerEntityManagerFactoryBean这个选项Spring扮演了容器的角色。完全掌管JPA -->
@@ -43,7 +44,7 @@
  						create-drop        加载hibernate时创建，退出是删除表结构
 						update                 加载hibernate自动更新数据库结构
 						慎用可能导致数据表丢失  -->
-				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<!-- 命名规则 My_NAME->MyName -->
 				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
 				<!-- 输出查询的sql语句 -->
@@ -53,13 +54,15 @@
 				<!-- 启用查询二级缓存 -->
 				<prop key="hibernate.cache.use_query_cache">true</prop>
 				<!-- 启用hibernate 二级缓存插件 -->
-				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
 			</props>
 		</property>
 	</bean>
 	
 	<!-- Hibernate对Jpa的实现 -->
-	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="showSql" value="true"></property>
+	</bean>
 	
 	<!-- 配置Spring Data Jpa扫描目录 -->
 	<jpa:repositories base-package="com.cousin.**.jpa" 
@@ -94,7 +97,7 @@
 		<!-- 定义数据池最大连接是多少 -->
 		<property name="maxPoolSize" value="5" />
 		<!-- 定义数据池最少连接时多收 -->
-		<property name="minPollSize" value="1"/>
+		<property name="minPoolSize" value="1"/>
 		<!-- 初始化连接数量 -->
 		<property name="initialPoolSize" value="1"/>
 	</bean>
