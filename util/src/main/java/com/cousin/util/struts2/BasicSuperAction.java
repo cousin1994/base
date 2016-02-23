@@ -17,6 +17,26 @@ public abstract class BasicSuperAction<T> extends SuperAction {
 	public int pageSize = 20;
 	protected Page<T> page;
 	
+protected Long sid ;
+	
+	protected Long[] id;
+
+	public Long getSid() {
+		return sid;
+	}
+
+	public void setSid(Long sid) {
+		this.sid = sid;
+	}
+
+	public Long[] getId() {
+		return id;
+	}
+
+	public void setId(Long[] id) {
+		this.id = id;
+	}
+
 
 
 	//表示默认的action入口就是list函数

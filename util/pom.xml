@@ -134,7 +134,7 @@
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
-				<scope>provided</scope>
+				<scope>provided</scope><!-- 表明这个包是在编译时期，打包以后就没有这个东西了 -->
 			</dependency>
 			<dependency>
 				<groupId>javax.servlet</groupId>
