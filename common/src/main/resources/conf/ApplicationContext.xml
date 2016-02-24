@@ -16,11 +16,13 @@
 	
 	<!-- 使用注解方式 自动注册bean 保证@Required、@Autowired 的属性被注入 -->
 	<context:component-scan base-package="com.cousin">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
 	<!-- 异步调用需要用到 -->
 	<task:annotation-driven />
+	
 
 	
 	 <!-- 定义实体管理器工厂
@@ -65,7 +67,7 @@
 	</bean>
 	
 	<!-- 配置Spring Data Jpa扫描目录 -->
-	<jpa:repositories base-package="com.cousin.**.jpa" 
+	<jpa:repositories base-package="com.cousin" 
 		entity-manager-factory-ref="entityManagerFactory" 
 		transaction-manager-ref="transactionManager"
 		factory-class="com.cousin.util.data.jpa.factory.BaseRepositoryFactoryBean"/>
