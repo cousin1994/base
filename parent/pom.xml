@@ -39,6 +39,7 @@
   	<pingyin4j.version>2.5.0</pingyin4j.version> <!-- 汉字换成拼音字母 -->
   	<mongo.version>3.2.0</mongo.version> <!-- 芒果db驱动 -->
   	<dom4j.version>1.6.1</dom4j.version>
+  	<log4j.version>1.2.17</log4j.version>
   </properties>
   
   <!-- 预定义依赖项的version，scope和exclusions，子项目中只需定义groupid和 artifactid即可 -->
@@ -194,6 +195,11 @@
 				<artifactId>struts2-json-plugin</artifactId>
 				<version>${struts2.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.struts</groupId>
+				<artifactId>struts2-junit-plugin</artifactId>
+				<version>${struts2.version}</version>
+			</dependency>
 
 			<!--结束STRUTS2依赖定义 -->
 			
@@ -342,6 +348,13 @@
 				<artifactId>dom4j</artifactId>
 				<version>${dom4j.version}</version>
 			</dependency>
+			
+			 <!-- log4j -->    
+        <dependency>    
+            <groupId>log4j</groupId>    
+            <artifactId>log4j</artifactId>    
+            <version>${log4j.version}</version>
+        </dependency>  
 			
   	</dependencies>
   </dependencyManagement>
