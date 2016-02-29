@@ -16,12 +16,22 @@
   	<module>core-web</module>
   	<module>build</module>
   </modules>
+  <!-- 配置好链接，以后打版本的时候就可以直接链接到github上 -->
+  	<scm>
+  		<url>https://github.com/cousin1994/base</url>
+		<connection>scm:git:git@github.com:cousin1994/base.git</connection>
+		<developerConnection>scm:git:git@github.com:cousin1994/base.git</developerConnection>
+	</scm>
+  
   <build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.4</version>
+				<version>2.5.2</version>
+				<configuration>
+            		<autoVersionSubmodules>true</autoVersionSubmodules>
+          		</configuration>
 			</plugin>
 		</plugins>
 	</build>
