@@ -64,8 +64,7 @@ public class BaseJpaSupportRepository<T, ID extends Serializable> extends Simple
 	 */
 	@Override
 	public Page<T> findAll(Map<String, Object> searchParams, int pageNumber, int pageSize, Order... orders) {
-		// TODO Auto-generated method stub
-		return findAll(bulidSpecification(searchParams, getDomainClass()),buildPageRequest(pageNumber,pageSize,orders));
+		return findAll(bulidSpecification(searchParams, getDomainClass()),buildPageRequest(pageNumber>0?pageNumber-1:0 ,pageSize,orders));
 	}
 	
 	/**
