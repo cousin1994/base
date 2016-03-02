@@ -26,7 +26,7 @@ public abstract class SuperAction extends ActionSupport implements Preparable, S
 	public static final String RELOAD = "reload";//重定向变量
 	
 	/** HttpServletRequest对象,可以利用该对象获取Http请求的相应数据 */
-	protected HttpServletRequest reqeust;
+	protected HttpServletRequest request;
 	
 	/**
 	 * 预定义操作。可以在这里直接写预定义操作
@@ -38,7 +38,7 @@ public abstract class SuperAction extends ActionSupport implements Preparable, S
 
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
-		this.reqeust = request;
+		this.request = request;
 	}
 	
 	

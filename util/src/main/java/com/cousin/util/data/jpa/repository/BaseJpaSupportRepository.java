@@ -73,7 +73,7 @@ public class BaseJpaSupportRepository<T, ID extends Serializable> extends Simple
 	 * @param clz
 	 * @return
 	 */
-	private Specification<T> bulidSpecification(final Map<String,Object> searchParams, final Class<T> clz){
+	public static<T> Specification<T> bulidSpecification(final Map<String,Object> searchParams, final Class<T> clz){
 		return new Specification<T>() {
 
 			/**
@@ -84,7 +84,7 @@ public class BaseJpaSupportRepository<T, ID extends Serializable> extends Simple
 			@SuppressWarnings({"rawtypes", "unchecked"})
 			@Override
 			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				if(searchParams!=null&& searchParams.size()>1){
+				if(searchParams!=null&& searchParams.size()>=1){
 					List<Predicate> predicates = new ArrayList<Predicate>();
 					Iterator<Map.Entry<String,Object>> entries = searchParams.entrySet().iterator();
 					while (entries.hasNext()) {
@@ -161,8 +161,8 @@ public class BaseJpaSupportRepository<T, ID extends Serializable> extends Simple
 						}
 					}
 					if(predicates.size()>0){
-						//return cb.and(predicates.toArray(new Predicate[predicates.size()]));
-						return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
+						return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+//						return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
 					}
 				}
 				return cb.conjunction();

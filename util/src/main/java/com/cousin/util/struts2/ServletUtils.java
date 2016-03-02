@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 /**
@@ -139,7 +140,9 @@ public class ServletUtils {
 				} else if (values.length > 1) {
 					params.put(unprefixed, values);
 				} else {
-					params.put(unprefixed, values[0]);
+					if (StringUtils.isNotBlank(values[0].trim())) {
+						params.put(unprefixed, values[0].trim());
+					}
 				}
 			}
 		}
