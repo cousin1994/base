@@ -40,6 +40,7 @@
   	<mongo.version>3.2.0</mongo.version> <!-- 芒果db驱动 -->
   	<dom4j.version>1.6.1</dom4j.version>
   	<log4j.version>1.2.17</log4j.version>
+  	<gson.version>2.6.2</gson.version>
   </properties>
   
   <!-- 预定义依赖项的version，scope和exclusions，子项目中只需定义groupid和 artifactid即可 -->
@@ -355,6 +356,13 @@
             <artifactId>log4j</artifactId>    
             <version>${log4j.version}</version>
         </dependency>  
+        
+        <!-- gson 驱动 -->
+        <dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
+		</dependency>
 			
   	</dependencies>
   </dependencyManagement>
