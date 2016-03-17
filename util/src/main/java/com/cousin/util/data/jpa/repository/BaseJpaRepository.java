@@ -1,6 +1,7 @@
 package com.cousin.util.data.jpa.repository;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -27,5 +28,17 @@ public interface BaseJpaRepository<T , ID extends Serializable> extends JpaRepos
 	 * @return
 	 */
 	public Page<T> findAll(Map<String,Object> searchParams, int pageNumber, int pageSize, Order...orders);
+	
+	/**
+	 * 批量插入数据
+	 * @param list
+	 */
+	public void batchInsert(List<T> list);
+	
+	/**
+	 * 批量更新数据
+	 * @param list
+	 */
+	public void batchUpdate(List<T> list);
 	
 }

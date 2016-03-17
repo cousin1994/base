@@ -51,12 +51,16 @@
 				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
 				<!-- 输出查询的sql语句 -->
 				<prop key="hibernate.show_sql">true</prop>
+				<!-- JDBC的批量抓取数量设定 -->
+				<prop key="hibernate.jdbc.batch_size">20</prop>
 				<!-- 启用二级缓存 -->
 				<prop key="hibernate.cache.use_second_level_cache">true</prop>
 				<!-- 启用查询二级缓存 -->
 				<prop key="hibernate.cache.use_query_cache">true</prop>
 				<!-- 启用hibernate 二级缓存插件 -->
 				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+				<!-- 标明缓存的配置文件的路径 -->
+				<prop key="hibernate.cache.provider_configuration">classpath:ehcache.xml</prop>
 			</props>
 		</property>
 	</bean>

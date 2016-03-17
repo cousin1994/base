@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.persistence.criteria.CriteriaQuery;
@@ -26,13 +27,16 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 public class BaseJpaSupportRepository<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseJpaRepository<T, ID> {
 
 	private static final ConversionService CONVERSION_SERVICE = new DefaultConversionService();
 	
+	@PersistenceContext
 	private final EntityManager em;
 	
+	@PersistenceContext
 	private Class<?> repositoryInterface;
 	
 	/**
@@ -194,5 +198,37 @@ public class BaseJpaSupportRepository<T, ID extends Serializable> extends Simple
 			in.value(object);
 		}
 		return in;
+	}
+
+
+	/**
+	 * 批量插入数据
+	 */
+	@Override
+	@Transactional
+	public void batchInsert(List<T> list) {
+		for (int i=0;i<list.size();i++){
+			em.persist(list.get(i));
+			if(i % 20 == 0){
+				em.flush();
+				em.clear();
+			}
+		}
+	}
+
+
+	/**
+	 * 批量更新数据
+	 */
+	@Override
+	@Transactional
+	public void batchUpdate(List<T> list) {
+		for(int i=0;i<list.size();i++){//20，和JDBC批量设置相同
+			em.merge(list.get(i));
+			if( i %20==0){
+				em.flush();
+				em.clear();
+			}
+		}
 	}
 }
