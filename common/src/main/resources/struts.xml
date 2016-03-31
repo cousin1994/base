@@ -27,7 +27,17 @@
 	
 	<package name="my-default" namespace="/" extends="convention-default,json-default">
 		<!-- 后期可以自己自定义加入拦截器 -->
-	
+		 <interceptors>  
+            <interceptor-stack name="default">  
+                <interceptor-ref name="exception">  
+                    <param name="logEnabled">true</param>  
+                    <param name="logLevel">  
+                        warn</param>  
+                </interceptor-ref>  
+                <interceptor-ref name="defaultStack"></interceptor-ref>  
+            </interceptor-stack>  
+        </interceptors>  
+        <default-interceptor-ref name="default"></default-interceptor-ref>  
 	</package>
     
 </struts>
