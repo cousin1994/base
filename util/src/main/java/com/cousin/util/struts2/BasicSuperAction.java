@@ -14,7 +14,7 @@ public abstract class BasicSuperAction<T> extends SuperAction {
 	private static final long serialVersionUID = -2880854052078364537L;
 	
 	public int pageNumber = 1;
-	public int pageSize = 20;
+	public int pageSize = 10;
 	protected Page<T> page;
 	
 protected Long sid ;
