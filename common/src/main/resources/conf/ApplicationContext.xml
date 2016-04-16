@@ -21,8 +21,7 @@
 	</context:component-scan>
 	
 	<!-- 异步调用需要用到 -->
-	<task:annotation-driven />
-	
+	<task:annotation-driven />  
 
 	
 	 <!-- 定义实体管理器工厂
